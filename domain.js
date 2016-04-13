@@ -24,7 +24,7 @@ exports.domain = {
         getCurrentUser = options.getCurrentUser;
         partitionKeyResolver = options.getPartitionKey;
         cqrsDomain = require('cqrs-domain')({
-            domainPath: options.domainPath,
+            domainPath: options.domainPath || process.cwd() + '/app/domain',
             eventStore: options.eventStore,
             snapshotThreshold: 100000
         });
@@ -44,7 +44,7 @@ exports.domain = {
             revision: 'head.revision'
         });
         let denormalizer = require('cqrs-eventdenormalizer')({
-            denormalizerPath: options.denormalizerPath,
+            denormalizerPath: options.denormalizerPath || process.cwd() + '/app/domain',
             repository: options.readModelStore
         });
         denormalizer.defineEvent({
