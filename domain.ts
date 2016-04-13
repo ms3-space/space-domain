@@ -33,11 +33,13 @@ export let domain = {
 
   init: function (options, cb) {
 
+    let domainPath = options.domainPath || process.cwd() + '/app/domain';
+
     getCurrentUser = options.getCurrentUser;
     partitionKeyResolver = options.getPartitionKey;
 
     cqrsDomain = require('cqrs-domain')({
-      domainPath: options.domainPath || process.cwd() + '/app/domain',
+      domainPath: domainPath,
       eventStore: options.eventStore,
       snapshotThreshold: 100000
     });
@@ -100,9 +102,8 @@ export let domain = {
         let context = cqrsDomain.tree.getContexts()[0];
 
         let glob = require('glob');
-        const domainPath = path.join(__dirname, '../domain/*');
 
-        const aggregateFolders = glob.sync(domainPath);
+        const aggregateFolders = glob.sync(domainPath + '/*');
 
         aggregateFolders.map(af => {
 
