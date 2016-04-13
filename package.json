@@ -1,0 +1,18 @@
+{
+  "name": "space-domain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "domain.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cqrs-domain": "^2.2.3",
+    "cqrs-eventdenormalizer": "^1.9.25",
+    "lodash": "^4.10.0",
+    "typescript": "^1.8.9",
+    "space-config": "git+https://git@bitbucket.org/mpseidel/space-config.git"
+  }
+}

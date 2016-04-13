@@ -1,0 +1,15 @@
+/node_modules
+!app/node_modules
+.idea
+www
+config/secrets.json
+config/**/*.js
+coverage
+app/**/*.js
+test/**/*.js
+*/**/*.js.map
+!/config/*.js
+!/test/index.js
+db.json
+stats.json
+
