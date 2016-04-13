@@ -6,6 +6,13 @@ import denormalizer = require('cqrs-eventdenormalizer');
 import objectAssign = require("object-assign");
 
 export const define = {
+  defineAggregate: function(name){
+    return domain.defineAggregate({
+      name,
+      defaultCommandPayload: 'payload',
+      defaultEventPayload: 'payload',
+    });
+  },
   defineCommand: function(handler:(data, aggregate) => any) {
     return domain.defineCommand({}, handler);
   },
