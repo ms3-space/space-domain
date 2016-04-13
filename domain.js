@@ -1,6 +1,6 @@
 "use strict";
 const space_config_1 = require("space-config");
-let debug = require('debug')('domain-miwo');
+let debug = require('debug')('space-domain');
 const objectAssign = require("object-assign");
 let path = require('path');
 let fs = require('fs');
@@ -24,7 +24,7 @@ exports.domain = {
         getCurrentUser = options.getCurrentUser;
         partitionKeyResolver = options.getPartitionKey;
         cqrsDomain = require('cqrs-domain')({
-            domainPath: __dirname + '/../domain',
+            domainPath: options.domainPath,
             eventStore: options.eventStore,
             snapshotThreshold: 100000
         });
@@ -44,7 +44,7 @@ exports.domain = {
             revision: 'head.revision'
         });
         let denormalizer = require('cqrs-eventdenormalizer')({
-            denormalizerPath: __dirname + '/../domain',
+            denormalizerPath: options.denormalizerPath,
             repository: options.readModelStore
         });
         denormalizer.defineEvent({

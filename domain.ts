@@ -1,10 +1,7 @@
 import {config} from "space-config";
-let debug = require('debug')('domain-miwo');
+let debug = require('debug')('space-domain');
 
 import {BaseCommand} from "./baseCommands";
-import {Event} from "./events";
-import {ViewBuilder} from "./viewbuilder";
-import {define} from "./define";
 import objectAssign = require("object-assign");
 
 let path = require('path');
@@ -40,7 +37,7 @@ export let domain = {
     partitionKeyResolver = options.getPartitionKey;
 
     cqrsDomain = require('cqrs-domain')({
-      domainPath: __dirname + '/../domain',
+      domainPath: options.domainPath,
       eventStore: options.eventStore,
       snapshotThreshold: 100000
     });
@@ -62,7 +59,7 @@ export let domain = {
     });
 
     let denormalizer = require('cqrs-eventdenormalizer')({
-      denormalizerPath: __dirname + '/../domain',
+      denormalizerPath: options.denormalizerPath,
       repository: options.readModelStore
     });
 
