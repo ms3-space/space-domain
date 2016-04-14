@@ -14,13 +14,16 @@ let denormalizerHelper = require('cqrs-eventdenormalizer');
 let getCurrentUser = (request) => 'anonymous';
 let commands = {};
 let viewBuilders = {};
+let _options = {};
 let errors = new events.EventEmitter();
 let denormalizerStatus = new events.EventEmitter();
 let partitionKeyResolver = () => undefined;
 exports.getPartitionKey = () => partitionKeyResolver();
+exports.getOptions = () => _options;
 exports.domain = {
     getCommands: () => commands,
     init: function (options, cb) {
+        _options = options;
         let domainPath = options.domainPath || process.cwd() + '/app/domain';
         getCurrentUser = options.getCurrentUser;
         partitionKeyResolver = options.getPartitionKey;

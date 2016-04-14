@@ -16,22 +16,25 @@ let cqrsDomain = undefined;
 let domainHelper = require('cqrs-domain');
 let denormalizerHelper = require('cqrs-eventdenormalizer');
 
-
 let getCurrentUser = (request:any) => 'anonymous';
 
 let commands = {};
 let viewBuilders = {};
+let _options:any = {};
+
 
 let errors = new events.EventEmitter();
 let denormalizerStatus = new events.EventEmitter();
 
 let partitionKeyResolver = () => undefined;
 export let getPartitionKey = () => partitionKeyResolver();
+export let getOptions = () => _options;
 
 export let domain = {
   getCommands: () => commands,
 
   init: function (options, cb) {
+    _options = options;
 
     let domainPath = options.domainPath || process.cwd() + '/app/domain';
 
