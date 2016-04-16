@@ -180,7 +180,7 @@ export let domain = {
                     (data, agg) => new anyCommandClass(data).applyEvent(new aggregateClass(agg)));
 
                 aggregate.addEvent(eventDefinition);
-              } else if (isViewBuilder && !viewBuilders[cf]) {
+              } else if (isViewBuilder && !viewBuilders[cf+commandClass]) {
 
                 let vb = new anyCommandClass();
 
@@ -218,7 +218,7 @@ export let domain = {
                       vb[method](data, new viewModel(vm));
                     });
 
-                    viewBuilders[cf] = newBuilder;
+                    viewBuilders[cf+commandClass] = newBuilder;
                     coll.addViewBuilder(newBuilder);
                   }
                 }
