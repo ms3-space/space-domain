@@ -1,6 +1,7 @@
 /node_modules
 !app/node_modules
 .idea
+.vscode
 www
 config/secrets.json
 config/**/*.js

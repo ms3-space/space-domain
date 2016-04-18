@@ -210,7 +210,7 @@ export let domain = {
                       viewBuilderMetadata);
 
                     const newBuilder = denormalizerHelper.defineViewBuilder(finalMetadata, function (data, vm) {
-                      let partitionKey = options.getPartitionKey();
+                      let partitionKey = getPartitionKey();
                       vm.set('PartitionKey', partitionKey);
                       vm.set('RowKey', vm.id.toString());
 

@@ -47,7 +47,6 @@ export class Aggregate {
   constructor(aggregate?:any) {
     if (aggregate) {
       this.aggregate = aggregate;
-      this.id = aggregate.id;
     }
   }
 

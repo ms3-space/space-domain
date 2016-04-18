@@ -25,7 +25,6 @@ class Aggregate {
     constructor(aggregate) {
         if (aggregate) {
             this.aggregate = aggregate;
-            this.id = aggregate.id;
         }
     }
     apply(event) {

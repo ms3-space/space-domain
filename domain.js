@@ -128,7 +128,7 @@ exports.domain = {
                                 eventDefinition = domainHelper.defineEvent({ name: eventName }, (data, agg) => new anyCommandClass(data).applyEvent(new aggregateClass(agg)));
                                 aggregate.addEvent(eventDefinition);
                             }
-                            else if (isViewBuilder && !viewBuilders[cf]) {
+                            else if (isViewBuilder && !viewBuilders[cf + commandClass]) {
                                 let vb = new anyCommandClass();
                                 const collectionName = space_config_1.config.get("tablePrefix") + vb.collection();
                                 const viewBuilderMetadata = vb.viewBuilderMetadata();
@@ -148,13 +148,13 @@ exports.domain = {
                                             name: eventName,
                                         }, viewBuilderMetadata);
                                         const newBuilder = denormalizerHelper.defineViewBuilder(finalMetadata, function (data, vm) {
-                                            let partitionKey = options.getPartitionKey();
+                                            let partitionKey = exports.getPartitionKey();
                                             vm.set('PartitionKey', partitionKey);
                                             vm.set('RowKey', vm.id.toString());
                                             const viewModel = metadata[1];
                                             vb[method](data, new viewModel(vm));
                                         });
-                                        viewBuilders[cf] = newBuilder;
+                                        viewBuilders[cf + commandClass] = newBuilder;
                                         coll.addViewBuilder(newBuilder);
                                     }
                                 }
