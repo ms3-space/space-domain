@@ -30,6 +30,8 @@ let partitionKeyResolver = () => undefined;
 export let getPartitionKey = () => partitionKeyResolver();
 export let getOptions = () => _options;
 
+let denormalizersActive = 0;
+
 export let domain = {
   getCommands: () => commands,
 
@@ -226,15 +228,33 @@ export let domain = {
             }
           });
 
+          function handleEvent(evt) {
+            denormalizer.handle(evt, () => {
+              denormalizersActive--;
+              denormalizerStatus.emit('completedDenormalizing', evt);
+              console.log('event handled', evt.id);
+              console.log('denormalizersActive', denormalizersActive);
+            });
+          };
+
+          function handleSequentially(evt){
+            if(denormalizersActive > 1){
+              console.log('waiting', evt.id);
+              denormalizerStatus.once('completedDenormalizing', () => handleSequentially(evt));
+            }else {
+              handleEvent(evt);
+            }
+          }
 
           cqrsDomain.onEvent(function (evt) {
+            denormalizersActive++;
             denormalizerStatus.emit('startedDenormalizing', evt);
+            console.log('onEvent', evt.id);
+            console.log('denormalizersActive', denormalizersActive);
 
-            debug('onEvent', evt);
-            denormalizer.handle(evt, () => {
-              denormalizerStatus.emit('completedDenormalizing', evt);
-            });
+            handleSequentially(evt);
           });
+
         });
 
         if (cb) {
@@ -283,14 +303,7 @@ export let domain = {
 
       errors.on('commandError', errorHandler);
 
-      let denormalizersActive = 0;
-
-      denormalizerStatus.on('startedDenormalizing', () => {
-        denormalizersActive++;
-      });
-
       denormalizerStatus.on('completedDenormalizing', (evt) => {
-        denormalizersActive--;
         if (observeEvents) {
           observeEvents(evt);
         }

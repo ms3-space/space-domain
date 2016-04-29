@@ -20,6 +20,7 @@ let denormalizerStatus = new events.EventEmitter();
 let partitionKeyResolver = () => undefined;
 exports.getPartitionKey = () => partitionKeyResolver();
 exports.getOptions = () => _options;
+let denormalizersActive = 0;
 exports.domain = {
     getCommands: () => commands,
     init: function (options, cb) {
@@ -161,12 +162,30 @@ exports.domain = {
                             }
                         }
                     });
-                    cqrsDomain.onEvent(function (evt) {
-                        denormalizerStatus.emit('startedDenormalizing', evt);
-                        debug('onEvent', evt);
+                    function handleEvent(evt) {
                         denormalizer.handle(evt, () => {
+                            denormalizersActive--;
                             denormalizerStatus.emit('completedDenormalizing', evt);
+                            console.log('event handled', evt.id);
+                            console.log('denormalizersActive', denormalizersActive);
                         });
+                    }
+                    ;
+                    function handleSequentially(evt) {
+                        if (denormalizersActive > 1) {
+                            console.log('waiting', evt.id);
+                            denormalizerStatus.once('completedDenormalizing', () => handleSequentially(evt));
+                        }
+                        else {
+                            handleEvent(evt);
+                        }
+                    }
+                    cqrsDomain.onEvent(function (evt) {
+                        denormalizersActive++;
+                        denormalizerStatus.emit('startedDenormalizing', evt);
+                        console.log('onEvent', evt.id);
+                        console.log('denormalizersActive', denormalizersActive);
+                        handleSequentially(evt);
                     });
                 });
                 if (cb) {
@@ -206,12 +225,7 @@ exports.domain = {
                 return reject(err);
             };
             errors.on('commandError', errorHandler);
-            let denormalizersActive = 0;
-            denormalizerStatus.on('startedDenormalizing', () => {
-                denormalizersActive++;
-            });
             denormalizerStatus.on('completedDenormalizing', (evt) => {
-                denormalizersActive--;
                 if (observeEvents) {
                     observeEvents(evt);
                 }
