@@ -18,6 +18,9 @@ export abstract class Event {
   }
 }
 
+export class AggregateCreatedEvent extends Event { 
+}
+
 export function evt(name: string) {
   return (target: any) => {
     target.prototype.evt = () => name;

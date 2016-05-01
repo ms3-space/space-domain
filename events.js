@@ -15,6 +15,9 @@ class Event {
     }
 }
 exports.Event = Event;
+class AggregateCreatedEvent extends Event {
+}
+exports.AggregateCreatedEvent = AggregateCreatedEvent;
 function evt(name) {
     return (target) => {
         target.prototype.evt = () => name;

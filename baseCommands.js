@@ -51,6 +51,12 @@ class Command extends BaseCommand {
     aggregateId() {
         return undefined;
     }
+    getAggregateId() {
+        if (this.aggregateIdField && this[this.aggregateIdField]) {
+            return this[this.aggregateIdField];
+        }
+        return undefined;
+    }
     getAllFieldNames() {
         let fields = this['fields'] || [];
         let fieldNames = Object.getOwnPropertyNames(fields);

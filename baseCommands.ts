@@ -79,6 +79,15 @@ export abstract class Command extends BaseCommand {
       }
     }
   }
+    
+  getAggregateId(){
+    
+    if (this.aggregateIdField && this[this.aggregateIdField]) {
+      return this[this.aggregateIdField];
+    }
+    
+    return undefined;
+  }
 
   getAllFieldNames() {
 
