@@ -13,4 +13,4 @@ test/**/*.js
 !/test/index.js
 db.json
 stats.json
-
+npm-debug.log

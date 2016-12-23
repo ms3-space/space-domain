@@ -1,5 +1,9 @@
 "use strict";
 class Event {
+    apply(aggregate) { }
+    applyEvent(aggregate) {
+        this.apply(aggregate);
+    }
     constructor(payload) {
         if (payload) {
             for (var i in payload) {
@@ -8,10 +12,6 @@ class Event {
                 }
             }
         }
-    }
-    apply(aggregate) { }
-    applyEvent(aggregate) {
-        this.apply(aggregate);
     }
 }
 exports.Event = Event;

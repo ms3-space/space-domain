@@ -1,13 +1,13 @@
 "use strict";
 const space_config_1 = require("@ms3/space-config");
 const domain_1 = require("./domain");
-const domain = require('cqrs-domain');
-const denormalizer = require('cqrs-eventdenormalizer');
+const domain = require("cqrs-domain");
+const denormalizer = require("cqrs-eventdenormalizer");
 const objectAssign = require("object-assign");
 exports.define = {
     defineAggregate: function (name) {
         return domain.defineAggregate({
-            name: name,
+            name,
             defaultCommandPayload: 'payload',
             defaultEventPayload: 'payload',
         });

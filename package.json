@@ -12,7 +12,10 @@
     "cqrs-domain": "^2.2.3",
     "cqrs-eventdenormalizer": "^1.9.25",
     "lodash": "^4.10.0",
-    "typescript": "^1.8.9",
+    "typescript": "2.1.4",
     "@ms3/space-config": "1.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^6.0.53"
   }
 }

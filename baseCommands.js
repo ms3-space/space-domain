@@ -39,6 +39,9 @@ class Aggregate {
 }
 exports.Aggregate = Aggregate;
 class Command extends BaseCommand {
+    aggregateId() {
+        return undefined;
+    }
     constructor(payload, id) {
         super();
         this._cmdId = id;
@@ -47,9 +50,6 @@ class Command extends BaseCommand {
                 this[i] = payload[i];
             }
         }
-    }
-    aggregateId() {
-        return undefined;
     }
     getAggregateId() {
         if (this.aggregateIdField && this[this.aggregateIdField]) {
@@ -80,7 +80,7 @@ class Command extends BaseCommand {
         let json = {
             id: this._cmdId || 'cmd-' + Date.now(),
             command: this.command(),
-            payload: payload,
+            payload,
             aggregate: null
         };
         if (aggId) {
