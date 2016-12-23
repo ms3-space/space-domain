@@ -1,5 +1,5 @@
 "use strict";
-const space_config_1 = require("space-config");
+const space_config_1 = require("@ms3/space-config");
 let debug = require('debug')('space-domain');
 const objectAssign = require("object-assign");
 let path = require('path');

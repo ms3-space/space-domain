@@ -1,5 +1,5 @@
 "use strict";
-const space_config_1 = require("space-config");
+const space_config_1 = require("@ms3/space-config");
 const domain_1 = require("./domain");
 let viewModel = require('viewmodel');
 function createReadModel(name, allowClear) {

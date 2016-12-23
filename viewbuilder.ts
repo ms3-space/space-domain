@@ -1,4 +1,4 @@
-export class ViewBuilder {
+pxport class ViewBuilder {
 }
 
 export class ViewModel {

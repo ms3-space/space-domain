@@ -1,4 +1,4 @@
-import {config} from "space-config";
+import {config} from "@ms3/space-config";
 let debug = require('debug')('space-domain');
 
 import {BaseCommand} from "./baseCommands";

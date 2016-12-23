@@ -1,5 +1,5 @@
 "use strict";
-const space_config_1 = require("space-config");
+const space_config_1 = require("@ms3/space-config");
 const domain_1 = require("./domain");
 const domain = require('cqrs-domain');
 const denormalizer = require('cqrs-eventdenormalizer');

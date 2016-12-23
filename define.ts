@@ -1,4 +1,4 @@
-import {config} from "space-config";
+import {config} from "@ms3/space-config";
 import {getPartitionKey} from "./domain";
 
 import domain = require('cqrs-domain');

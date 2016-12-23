@@ -1,4 +1,4 @@
-import {config} from "space-config";
+import {config} from "@ms3/space-config";
 import {getPartitionKey, getOptions} from "./domain";
 let viewModel = require('viewmodel');
 
