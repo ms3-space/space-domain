@@ -232,14 +232,11 @@ export let domain = {
             denormalizer.handle(evt, () => {
               denormalizersActive--;
               denormalizerStatus.emit('completedDenormalizing', evt);
-              console.log('event handled', evt.id);
-              console.log('denormalizersActive', denormalizersActive);
             });
           };
 
           function handleSequentially(evt){
             if(denormalizersActive > 1){
-              console.log('waiting', evt.id);
               denormalizerStatus.once('completedDenormalizing', () => handleSequentially(evt));
             }else {
               handleEvent(evt);
@@ -249,8 +246,6 @@ export let domain = {
           cqrsDomain.onEvent(function (evt) {
             denormalizersActive++;
             denormalizerStatus.emit('startedDenormalizing', evt);
-            console.log('onEvent', evt.id);
-            console.log('denormalizersActive', denormalizersActive);
 
             handleSequentially(evt);
           });
