@@ -4,6 +4,6 @@ node_js:
 before_script:
   - npm install -g mocha
 script:
-  - npm build
+  - node node_modules\typescript\bin\tsc
   - ls ./test
   - npm test

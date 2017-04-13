@@ -4,7 +4,7 @@
   "description": "",
   "main": "domain.js",
   "scripts": {
-    "build": "node_modules/.bin/tsc",
+    "build": "node node_modules/.bin/tsc",
     "test": "mocha"
   },
   "author": "",
@@ -18,8 +18,9 @@
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",
-    "@types/node": "^6.0.53",
+    "@types/node": "^6.0.68",
     "@types/object-assign": "^4.0.30",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "typescript": "^2.1.4"
   }
 }
