@@ -5,4 +5,5 @@ before_script:
   - npm install -g mocha
 script:
   - npm build
+  - ls ./test
   - npm test
