@@ -16,6 +16,7 @@
     "@ms3/space-config": "1.2.0"
   },
   "devDependencies": {
-    "@types/node": "^6.0.53"
+    "@types/node": "^6.0.53",
+    "@types/object-assign": "^4.0.30"
   }
 }

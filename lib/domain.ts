@@ -131,7 +131,7 @@ export let domain = {
           const searchPath = af + '/**/*.js';
           const domainFiles = glob.sync(searchPath);
 
-          const commandBase = require('./baseCommands').Command;
+          const commandBase = require('./../baseCommands').Command;
           const eventBase = require('./events').Event;
           const viewBuilderBase = require('./viewbuilder').ViewBuilder;
 
