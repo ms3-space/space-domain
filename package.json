@@ -4,7 +4,8 @@
   "description": "",
   "main": "domain.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node_modules/.bin/tsc",
+    "test": "mocha"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +18,7 @@
   },
   "devDependencies": {
     "@types/node": "^6.0.53",
-    "@types/object-assign": "^4.0.30"
+    "@types/object-assign": "^4.0.30",
+    "mocha": "^3.2.0"
   }
 }
